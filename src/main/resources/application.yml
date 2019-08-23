@@ -1,0 +1,29 @@
+#\u53BB\u6389spring security,\u4E0D\u7136\u4EFB\u4F55\u63A5\u53E3\u90FD\u8981\u6C42\u767B\u5F55\u63D0\u793A
+#security.basic.enabled=false
+#management.security.enabled=false
+server:
+  port: 8878
+  servlet:
+    context-path: /mirror.ubports.web
+spring:
+  application:
+  name: invoice
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-interceptors: ConnectionState;StatementFinalizer;ResetAbandonedTimer;SlowQueryReport(threshold=2000)
+    url: jdbc:mysql://127.0.0.1:3306/electronics_invoice?noAccessToProcedureBodies=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password:
+    log-abandoned: true
+    remove-abandoned: true
+    bandon-when-percentage-full: 50
+    suspect-timeout: 60
+    remove-abandoned-timeout: 90
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#  jackson:
+#    default-property-inclusion: NON_NULL
+mybatis:
+#  type-aliases-package:com.neo.entity
+  configuration:
+    mapUnderscoreToCamelCase: true
