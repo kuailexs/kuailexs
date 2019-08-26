@@ -1,8 +1,7 @@
-package com.kuailexs.mirror.ubports.web.service.impl;
+package com.kuailexs.mirror.ubports.web.common.service.impl;
 
-import com.kuailexs.mirror.ubports.web.mapper.MyBaseMapper;
-import com.kuailexs.mirror.ubports.web.mapper.MyBaseMapper;
-import com.kuailexs.mirror.ubports.web.service.BaseService;
+import com.kuailexs.mirror.ubports.web.common.mapper.MyBaseMapper;
+import com.kuailexs.mirror.ubports.web.common.service.BaseService;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public abstract class BaseServiceImpl<T,K> implements BaseService<T,K> {
 
     @Override
     public int save(T t) {
-        return getBaseMapper().insert(t);
+        return getBaseMapper().insertUseGeneratedKeys(t);
     }
 
     @Override

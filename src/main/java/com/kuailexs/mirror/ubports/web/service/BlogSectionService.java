@@ -1,6 +1,7 @@
 package com.kuailexs.mirror.ubports.web.service;
 
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
+import com.kuailexs.mirror.ubports.web.common.service.BaseService;
 
 /**
  * @Author ：dhl

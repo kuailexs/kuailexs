@@ -1,6 +1,7 @@
 package com.kuailexs.mirror.ubports.web.mapper;
 
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
+import com.kuailexs.mirror.ubports.web.common.mapper.MyBaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
