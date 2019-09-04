@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kuailexs</groupId>
-    <artifactId>mirror-ubports-web</artifactId>
+    <artifactId>kuailexs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mirror-ubports-web</name>
-    <description>mirror-ubports-web</description>
+    <name>kuailexs</name>
+    <description>kuailexs</description>
 
     <properties>
         <java.version>1.8</java.version>

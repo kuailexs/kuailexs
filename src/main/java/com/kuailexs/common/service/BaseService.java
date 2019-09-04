@@ -1,6 +1,6 @@
-package com.kuailexs.mirror.ubports.web.common.service;
+package com.kuailexs.common.service;
 
-import com.kuailexs.mirror.ubports.web.common.mapper.MyBaseMapper;
+import com.kuailexs.common.mapper.MyBaseMapper;
 
 import java.util.List;
 

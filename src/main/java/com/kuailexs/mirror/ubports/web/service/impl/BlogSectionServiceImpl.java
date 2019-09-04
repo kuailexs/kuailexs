@@ -1,8 +1,8 @@
 package com.kuailexs.mirror.ubports.web.service.impl;
 
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
-import com.kuailexs.mirror.ubports.web.common.mapper.MyBaseMapper;
-import com.kuailexs.mirror.ubports.web.common.service.impl.BaseServiceImpl;
+import com.kuailexs.common.mapper.MyBaseMapper;
+import com.kuailexs.common.service.impl.BaseServiceImpl;
 import com.kuailexs.mirror.ubports.web.mapper.BlogSectionMapper;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import org.springframework.beans.factory.annotation.Autowired;
