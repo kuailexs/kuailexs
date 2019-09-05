@@ -1,4 +1,3 @@
-
 -- ----------------------------
 -- Table structure for mirror_ubports_blog
 -- ----------------------------
@@ -13,6 +12,7 @@ CREATE TABLE `mirror_ubports_blog` (
   `blog_title_zh_` varchar(512) DEFAULT NULL,
   `subtitle_zh_` varchar(200) DEFAULT NULL,
   `type_` int(11) DEFAULT NULL,
+  `url_` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_`)
 ) ;
 
@@ -27,13 +27,19 @@ CREATE TABLE `mirror_ubports_blog_paragraph` (
   `original_html_` text,
   `original_text_` text,
   `google_text_` text,
+  `google_translated_` int(11) DEFAULT NULL,
   `youdao_text_` text,
+  `youdao_translated_` int(11) DEFAULT NULL,
   `review_text_` text,
   `review_html_` text,
   `create_time_` datetime DEFAULT NULL,
   `last_update_time_` datetime DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_`)
+  PRIMARY KEY (`id_`),
+  KEY `blog_id_` (`blog_id_`) USING BTREE,
+  KEY `google_translated_` (`google_translated_`),
+  KEY `section_id_` (`section_id_`),
+  KEY `youdao_translated_` (`youdao_translated_`)
 ) ;
 
 -- ----------------------------
@@ -44,5 +50,6 @@ CREATE TABLE `mirror_ubports_blog_section` (
   `id_` int(11) NOT NULL AUTO_INCREMENT,
   `sort_` int(11) NOT NULL,
   `blog_id_` int(11) NOT NULL,
-  PRIMARY KEY (`id_`)
+  PRIMARY KEY (`id_`),
+  KEY `blog_id_` (`blog_id_`)
 ) ;
