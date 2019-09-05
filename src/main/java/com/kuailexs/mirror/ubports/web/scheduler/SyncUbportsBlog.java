@@ -1,5 +1,6 @@
 package com.kuailexs.mirror.ubports.web.scheduler;
 
+import com.kuailexs.mirror.ubports.web.BlogType;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
@@ -35,15 +36,16 @@ public class SyncUbportsBlog {
 
     private final String hostPath = "https://ubports.com";
 
-    @Scheduled(fixedDelay = 30 * 1000)
+    @Scheduled(fixedDelay = 60 * 60 * 1000)
     public void onTimeSyncUbportsBlog() {
+        //syncUbportsBlog(BlogType.QA);
+        syncUbportsBlog(BlogType.BLOG);
+    }
+    public void syncUbportsBlog(BlogType blogType) {
 
+        String QAListFirstPagePath = getQAListFirstPagePath(blogType);
 
-        String thisHttpPath = "https://ubports.com";
-
-        String QAListFirstPagePath = getQAListFirstPagePath(thisHttpPath);
-
-        thisHttpPath = getThisHttpPath(QAListFirstPagePath);
+        String thisHttpPath = getThisHttpPath(QAListFirstPagePath);
 
         List<String> QAListPath = new ArrayList<>();
         if(StringUtils.hasText(thisHttpPath)){
@@ -59,7 +61,7 @@ public class SyncUbportsBlog {
                 try {
                     boolean exist = blogService.existByUrl(thisHttpPath);
                     if(!exist) {
-                        Blog blog = getBlog(thisHttpPath);
+                        Blog blog = getBlog(thisHttpPath,blogType);
                         blogService.save(blog);
                     }
                 } catch (IOException e) {
@@ -69,7 +71,7 @@ public class SyncUbportsBlog {
         }
     }
 
-    private Blog getBlog(String thisHttpPath) throws IOException {
+    private Blog getBlog(String thisHttpPath , BlogType blogType) throws IOException {
         if(StringUtils.hasLength(thisHttpPath)) {
             Document document = Jsoup.connect(thisHttpPath).get();
             Element element = document.selectFirst("div.blog_title");
@@ -87,7 +89,7 @@ public class SyncUbportsBlog {
             blog.setSubtitle(subtitle);
             blog.setDate(data);
             blog.setDateStr(dataShow);
-            blog.setType(1);
+            blog.setType(blogType.getCode());
             blog.setCreateDate(thisTime);
 
             List<BlogSection> blogSectionList = new ArrayList<>();
@@ -156,16 +158,26 @@ public class SyncUbportsBlog {
         return thisHttpPath;
     }
 
-    private String getQAListFirstPagePath(String thisHttpPath) {
+    private String getQAListFirstPagePath(BlogType blogType) {
         String QAListPath = null;
-        if(StringUtils.hasLength(thisHttpPath)) {
+        if(StringUtils.hasLength(hostPath)) {
+            String containsString = "ubuntu-touch-q-a";
+            switch (blogType){
+                case QA:
+                    containsString = "ubuntu-touch-q-a";
+                    break;
+                case BLOG:
+                    containsString = "blogs";
+                    break;
+            }
             try {
-                Document document = Jsoup.connect(thisHttpPath).get();
+                Document document = Jsoup.connect(hostPath).get();
                 Element element = document.selectFirst("#top_menu");
                 Elements elements = element.select("li");
                 for(Element elementNext : elements) {
                     String href = elementNext.selectFirst("a").attr("href");
-                    if(StringUtils.hasText(href) && href.contains("ubuntu-touch-q-a")) {
+
+                    if(StringUtils.hasText(href) && href.contains(containsString)) {
                         QAListPath = href;
                         break;
                     }

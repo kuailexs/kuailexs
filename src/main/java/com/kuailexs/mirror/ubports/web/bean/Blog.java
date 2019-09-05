@@ -47,7 +47,7 @@ public class Blog {
     private String subtitleZh;
 
     /**
-     * 1.博客  2.问答
+     * 1.问答  2.博客
      */
     @Column(name = "type_")
     private Integer type;
