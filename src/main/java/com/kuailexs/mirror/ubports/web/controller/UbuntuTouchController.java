@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version:
  */
 @RestController
-@RequestMapping(value = "ubports")
+@RequestMapping(value = "mirror.ubports")
 public class UbuntuTouchController {
 
     @RequestMapping(value = "saveQA")

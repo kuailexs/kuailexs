@@ -34,12 +34,13 @@ import java.net.URLEncoder;
  * @Version:
  */
 public class TranslateGoogle {
+    public final static String ZH = "zh-CN";
 
-    public String translate(String text, String targetLang) throws Exception {
+    public static String translate(String text, String targetLang) throws Exception {
         return execute(text,  targetLang) ;
     }
 
-    private String execute(final String text,
+    private static String execute(final String text,
                            final String targetLang) throws Exception {
         //inspection(srcLang, targetLang) ;
         StringBuffer sb = new StringBuffer();

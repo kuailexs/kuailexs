@@ -22,6 +22,9 @@ public class Blog {
     @Column(name = "id_")
     private Integer id;
 
+    @Column(name = "url_")
+    private String url;
+
     @Column(name = "blog_title_")
     private String blogTitle;
 
@@ -43,6 +46,9 @@ public class Blog {
     @Column(name = "subtitle_zh_")
     private String subtitleZh;
 
+    /**
+     * 1.博客  2.问答
+     */
     @Column(name = "type_")
     private Integer type;
 }

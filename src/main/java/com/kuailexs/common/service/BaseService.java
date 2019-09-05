@@ -21,5 +21,9 @@ public interface BaseService<T,K> {
     int delete(K id);
     int update(T t);
 
+    T selectOneByExample(Object example);
+
+    List<T> selectByExample(Object example);
+
     MyBaseMapper<T> getBaseMapper();
 }

@@ -3,10 +3,16 @@ package com.kuailexs.mirror.ubports.web.service.impl;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.common.mapper.MyBaseMapper;
 import com.kuailexs.common.service.impl.BaseServiceImpl;
+import com.kuailexs.mirror.ubports.web.bean.BlogSection;
 import com.kuailexs.mirror.ubports.web.mapper.BlogMapper;
+import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
+import com.kuailexs.mirror.ubports.web.vo.BlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @Author ：dhl
@@ -20,6 +26,34 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog,Integer> implements Bl
 
     @Autowired
     BlogMapper blogMapper;
+    @Autowired
+    BlogSectionService blogSectionService;
+
+    @Override
+    public int save(Blog blog) {
+        int result = super.save(blog);
+        //如果是带子集的
+        if(blog instanceof BlogVo){
+            List<BlogSection> blogSectionList = ((BlogVo) blog).getBlogSectionList();
+            for (BlogSection blogSection : blogSectionList){
+                blogSection.setBlogId(blog.getId());
+                blogSectionService.save(blogSection);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean existByUrl(String thisHttpPath) {
+        Example example = new Example(Blog.class);
+        example.createCriteria()
+                .andEqualTo("url",thisHttpPath);
+        int count = blogMapper.selectCountByExample(example);
+        if(count >0){
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public MyBaseMapper<Blog> getBaseMapper() {

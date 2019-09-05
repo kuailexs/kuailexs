@@ -41,4 +41,13 @@ public abstract class BaseServiceImpl<T,K> implements BaseService<T,K> {
         return getBaseMapper().updateByPrimaryKeySelective(t);
     }
 
+    @Override
+    public T selectOneByExample(Object example) {
+        return getBaseMapper().selectOneByExample(example);
+    }
+
+    @Override
+    public List<T> selectByExample(Object example) {
+        return getBaseMapper().selectByExample(example);
+    }
 }

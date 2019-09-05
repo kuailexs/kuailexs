@@ -11,4 +11,7 @@ import com.kuailexs.common.service.BaseService;
  * @Version:
  */
 public interface BlogParagraphService extends BaseService<BlogParagraph,Integer> {
+
+    BlogParagraph getNextGoogleTranslateBlogParagraph();
+    BlogParagraph getNextYoudaoTranslateBlogParagraph();
 }

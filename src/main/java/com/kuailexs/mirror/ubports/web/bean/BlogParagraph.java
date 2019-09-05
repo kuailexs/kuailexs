@@ -34,7 +34,7 @@ public class BlogParagraph {
     private Date createTime;
 
     @Column(name = "last_update_time_")
-    private Integer lastUpdateTime;
+    private Date lastUpdateTime;
 
     @Column(name = "original_html_")
     private String originalHtml;
@@ -53,4 +53,12 @@ public class BlogParagraph {
 
     @Column(name = "review_html_")
     private String reviewHtml;
+
+    @Column(name = "google_translated_")
+    private Integer googleTranslated = 0;
+
+    @Column(name = "youdao_translated_")
+    private Integer youdaoTranslated = 0;
+
+
 }

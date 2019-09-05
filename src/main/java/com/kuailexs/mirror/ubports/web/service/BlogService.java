@@ -11,4 +11,6 @@ import com.kuailexs.common.service.BaseService;
  * @Version:
  */
 public interface BlogService extends BaseService<Blog,Integer> {
+
+    boolean existByUrl(String thisHttpPath);
 }

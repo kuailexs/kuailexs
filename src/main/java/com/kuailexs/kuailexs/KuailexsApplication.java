@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @MapperScan({"com.kuailexs.mirror.ubports.web.mapper"})
-@SpringBootApplication(scanBasePackages = {"com.kuailexs.mirror.ubports.web"})
+@SpringBootApplication(scanBasePackages = {"com.kuailexs"})
 public class KuailexsApplication {
 
     public static void main(String[] args) {

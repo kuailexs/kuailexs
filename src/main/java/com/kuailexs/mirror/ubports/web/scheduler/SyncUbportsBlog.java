@@ -6,12 +6,12 @@ import com.kuailexs.mirror.ubports.web.bean.BlogSection;
 import com.kuailexs.mirror.ubports.web.service.BlogParagraphService;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
-import com.kuailexs.translate.TranslateGoogle;
+import com.kuailexs.mirror.ubports.web.vo.BlogSectionVo;
+import com.kuailexs.mirror.ubports.web.vo.BlogVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author ：dhl
@@ -30,20 +28,15 @@ import java.util.List;
  * @Modified By：
  * @Version:
  */
-@EnableScheduling
 @Component
-public class OnTimeUpdate {
+public class SyncUbportsBlog {
     @Resource
     BlogService blogService;
-    @Resource
-    BlogSectionService blogSectionService;
-    @Resource
-    BlogParagraphService blogParagraphService;
 
     private final String hostPath = "https://ubports.com";
 
-    @Scheduled(cron = "0/30 * * * * ?")
-    public void OnTimeUpdate_() {
+    @Scheduled(fixedDelay = 30 * 1000)
+    public void onTimeSyncUbportsBlog() {
 
 
         String thisHttpPath = "https://ubports.com";
@@ -63,66 +56,73 @@ public class OnTimeUpdate {
         if(QAListPath.size() > 0){
             for (String QAPath : QAListPath){
                 thisHttpPath = getThisHttpPath(QAPath);
-                getBlog(thisHttpPath);
+                try {
+                    boolean exist = blogService.existByUrl(thisHttpPath);
+                    if(!exist) {
+                        Blog blog = getBlog(thisHttpPath);
+                        blogService.save(blog);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private void getBlog(String thisHttpPath) {
+    private Blog getBlog(String thisHttpPath) throws IOException {
         if(StringUtils.hasLength(thisHttpPath)) {
-            TranslateGoogle translateGoogle= new TranslateGoogle();
-            try {
-                Document document = Jsoup.connect(thisHttpPath).get();
-                Element element = document.selectFirst("div.blog_title");
-                String blog_post_name = element.selectFirst("#blog_post_name").text();
-                Element elementH2 = element.selectFirst("h2");
-                String subtitle = elementH2.selectFirst("span").text();
-                String data = elementH2.selectFirst("div").selectFirst("span").attr("data-oe-original");
-                String dataShow = elementH2.selectFirst("div").selectFirst("span").text();
+            Document document = Jsoup.connect(thisHttpPath).get();
+            Element element = document.selectFirst("div.blog_title");
+            String blog_post_name = element.selectFirst("#blog_post_name").text();
+            Element elementH2 = element.selectFirst("h2");
+            String subtitle = elementH2.selectFirst("span").text();
+            String data = elementH2.selectFirst("div").selectFirst("span").attr("data-oe-original");
+            String dataShow = elementH2.selectFirst("div").selectFirst("span").text();
 
-                Date thisTime = new Date();
+            Date thisTime = new Date();
 
-                Blog blog = new Blog();
-                blog.setBlogTitle(blog_post_name);
-                blog.setSubtitle(subtitle);
-                blog.setDate(data);
-                blog.setDateStr(dataShow);
-                blog.setType(1);
-                blog.setCreateDate(thisTime);
+            BlogVo blog = new BlogVo();
+            blog.setUrl(thisHttpPath);
+            blog.setBlogTitle(blog_post_name);
+            blog.setSubtitle(subtitle);
+            blog.setDate(data);
+            blog.setDateStr(dataShow);
+            blog.setType(1);
+            blog.setCreateDate(thisTime);
 
-                blogService.save(blog);
+            List<BlogSection> blogSectionList = new ArrayList<>();
+            blog.setBlogSectionList(blogSectionList);
 
-                Elements blog_contents = document.selectFirst("div#blog_content").select("section");
-                for( int i = 0 ; i < blog_contents.size() ; i++ ) {
-                    Element blog_content = blog_contents.get(i);
+            Elements blog_contents = document.selectFirst("div#blog_content").select("section");
+            for( int i = 0 ; i < blog_contents.size() ; i++ ) {
+                //主题
+                Element blog_content = blog_contents.get(i);
+                BlogSectionVo blogSection = new BlogSectionVo();
+                blogSection.setBlogId(blog.getId());
+                blogSection.setSort(i+1);
 
-                    BlogSection blogSection = new BlogSection();
-                    blogSection.setBlogId(blog.getId());
-                    blogSection.setSort(i+1);
+                blogSectionList.add(blogSection);
 
-                    blogSectionService.save(blogSection);
+                List<BlogParagraph> blogParagraphList = new ArrayList<>();
+                blogSection.setBlogParagraphList(blogParagraphList);
 
-                    Elements elements = blog_content.children();
-                    for ( int j = 0 ; j < elements.size() ; j++ ) {
-                        Element element1 = elements.get(j);
-
-                        BlogParagraph blogParagraph = new BlogParagraph();
-                        blogParagraph.setBlogId(blog.getId());
-                        blogParagraph.setSectionId(blogSection.getId());
-                        blogParagraph.setCreateTime(thisTime);
-                        blogParagraph.setSort(j+1);
-                        blogParagraph.setOriginalHtml(element1.toString());
-                        blogParagraph.setOriginalText(element1.text());
-                        blogParagraphService.save(blogParagraph);
-
-                    }
+                //段落
+                Elements elements = blog_content.children();
+                for ( int j = 0 ; j < elements.size() ; j++ ) {
+                    Element element1 = elements.get(j);
+                    BlogParagraph blogParagraph = new BlogParagraph();
+                    blogParagraph.setBlogId(blog.getId());
+                    blogParagraph.setSectionId(blogSection.getId());
+                    blogParagraph.setCreateTime(thisTime);
+                    blogParagraph.setSort(j+1);
+                    blogParagraph.setOriginalHtml(element1.toString());
+                    blogParagraph.setOriginalText(element1.text());
+                    blogParagraphList.add(blogParagraph);
                 }
-            }catch (IOException e){
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            return blog;
         }
+        return null;
     }
 
     private void getQAListPath(List<String> qaListPath, String thisHttpPath) {
