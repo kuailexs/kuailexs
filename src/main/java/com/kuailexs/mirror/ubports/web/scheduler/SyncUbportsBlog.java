@@ -1,11 +1,9 @@
 package com.kuailexs.mirror.ubports.web.scheduler;
 
-import com.kuailexs.mirror.ubports.web.BlogType;
+import com.kuailexs.mirror.ubports.web.constant.BlogType;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
-import com.kuailexs.mirror.ubports.web.service.BlogParagraphService;
-import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
 import com.kuailexs.mirror.ubports.web.vo.BlogSectionVo;
 import com.kuailexs.mirror.ubports.web.vo.BlogVo;
@@ -13,7 +11,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -36,11 +33,14 @@ public class SyncUbportsBlog {
 
     private final String hostPath = "https://ubports.com";
 
-    @Scheduled(fixedDelay = 60 * 60 * 1000)
+    @Scheduled(fixedDelay = 10 * 1000)
     public void onTimeSyncUbportsBlog() {
-        //syncUbportsBlog(BlogType.QA);
+        syncUbportsBlog(BlogType.QA);
         syncUbportsBlog(BlogType.BLOG);
     }
+
+
+
     public void syncUbportsBlog(BlogType blogType) {
 
         String QAListFirstPagePath = getQAListFirstPagePath(blogType);
@@ -73,6 +73,10 @@ public class SyncUbportsBlog {
 
     private Blog getBlog(String thisHttpPath , BlogType blogType) throws IOException {
         if(StringUtils.hasLength(thisHttpPath)) {
+
+            //先耍1s再干活
+            sleep(1000);
+
             Document document = Jsoup.connect(thisHttpPath).get();
             Element element = document.selectFirst("div.blog_title");
             String blog_post_name = element.selectFirst("#blog_post_name").text();
@@ -129,6 +133,10 @@ public class SyncUbportsBlog {
 
     private void getQAListPath(List<String> qaListPath, String thisHttpPath) {
         if(StringUtils.hasLength(thisHttpPath)) {
+
+            //先耍1s再干活
+            sleep(1000);
+
             try {
                 Document document = Jsoup.connect(thisHttpPath).get();
                 Elements elements = document.select("div.card");
@@ -161,6 +169,10 @@ public class SyncUbportsBlog {
     private String getQAListFirstPagePath(BlogType blogType) {
         String QAListPath = null;
         if(StringUtils.hasLength(hostPath)) {
+
+            //先耍1s再干活
+            sleep(1000);
+
             String containsString = "ubuntu-touch-q-a";
             switch (blogType){
                 case QA:
@@ -191,6 +203,10 @@ public class SyncUbportsBlog {
     private String getNextPagePath(String thisHttpPath) {
         String QAListPath = null;
         if(StringUtils.hasLength(thisHttpPath)) {
+
+            //先耍1s再干活
+            sleep(1000);
+
             try {
                 Document document = Jsoup.connect(thisHttpPath).get();
                 Element element = document.selectFirst("ul.pagination");
@@ -201,5 +217,12 @@ public class SyncUbportsBlog {
             }
         }
         return QAListPath;
+    }
+    private void sleep(long i) {
+        try {
+            Thread.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

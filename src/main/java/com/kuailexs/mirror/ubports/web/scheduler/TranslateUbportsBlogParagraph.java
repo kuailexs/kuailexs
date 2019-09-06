@@ -37,7 +37,7 @@ public class TranslateUbportsBlogParagraph {
     @Resource
     BlogParagraphService blogParagraphService;
 
-    @Scheduled(fixedDelay = 30 * 1000)
+    @Scheduled(fixedDelay = 5 * 1000)
     public void translateBlogParagraph() {
         try {
             BlogParagraph blogParagraph = blogParagraphService.getNextGoogleTranslateBlogParagraph();

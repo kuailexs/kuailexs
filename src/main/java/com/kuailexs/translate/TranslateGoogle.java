@@ -4,15 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -23,7 +19,6 @@ import javax.script.ScriptEngineManager;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.net.URLEncoder;
 
 /**
@@ -36,11 +31,7 @@ import java.net.URLEncoder;
 public class TranslateGoogle {
     public final static String ZH = "zh-CN";
 
-    public static String translate(String text, String targetLang) throws Exception {
-        return execute(text,  targetLang) ;
-    }
-
-    private static String execute(final String text,
+    public static String translate(final String text,
                            final String targetLang) throws Exception {
         //inspection(srcLang, targetLang) ;
         StringBuffer sb = new StringBuffer();

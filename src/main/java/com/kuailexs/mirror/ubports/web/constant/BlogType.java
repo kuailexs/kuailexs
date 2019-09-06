@@ -1,4 +1,4 @@
-package com.kuailexs.mirror.ubports.web;
+package com.kuailexs.mirror.ubports.web.constant;
 
 public enum BlogType {
     QA(1,"问答"),
