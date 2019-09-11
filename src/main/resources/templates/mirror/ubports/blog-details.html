@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>快乐相随</title>
+    <style>
+        div.mirror-ubports-blog-wrap{
+            width: 90%;
+            margin: 0 auto;
+        }
+        div.mirror-ubports-blog-wrap .blog_title{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="mirror-ubports-blog-wrap">
+    <div class="blog_title js_tweet">
+        <h1 id="blog_post_name" placeholder="博文标题" data-blog-id="236" class="text-epsilon-lighter" th:text="${blog.blogTitle}"></h1>
+        <h2 placeholder="小标题" class="text-epsilon-lighter">
+            <span th:text="${blog.subtitle}"></span>
+            <div class="text-center" name="post_date">
+                <span data-oe-original="2019-07-17 16:48:08" class="h5 o_not_editable" th:text="${blog.dateStr}"></span>
+            </div>
+        </h2>
+    </div>
+    <div id="blog_content" class="blog_content mt32 js_tweet">
+        <section th:each="blogSection,memberStat:${blogSectionList}" >
+            <th:block th:each="blogParagraph,memberStat:${blogSection.blogParagraphList}">
+                <th:block th:if="${!#strings.isEmpty(blogParagraph.originalText)}" th:utext="${blogParagraph.originalHtml}">
+                </th:block>
+                <p th:if="${!#strings.isEmpty(blogParagraph.googleText)}" th:utext="${blogParagraph.googleText}">
+                </p>
+            </th:block>
+        </section>
+    </div>
+</div>
+</body>
+</html>

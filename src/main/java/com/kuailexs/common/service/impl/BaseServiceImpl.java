@@ -22,6 +22,11 @@ public abstract class BaseServiceImpl<T,K> implements BaseService<T,K> {
     }
 
     @Override
+    public List<T> list(T t) {
+        return getBaseMapper().select(t);
+    }
+
+    @Override
     public T getOne(K id) {
         return (T) getBaseMapper().selectByPrimaryKey(id);
     }

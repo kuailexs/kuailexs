@@ -25,3 +25,9 @@ mybatis:
 #  type-aliases-package:com.neo.entity
   configuration:
     mapUnderscoreToCamelCase: true
+
+#logging
+logging:
+  level:
+    root:
+      debug

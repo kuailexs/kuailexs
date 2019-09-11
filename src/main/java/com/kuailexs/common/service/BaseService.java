@@ -16,6 +16,7 @@ public interface BaseService<T,K> {
 
 
     List<T> list();
+    List<T> list(T t);
     T getOne(K id);
     int save(T t);
     int delete(K id);

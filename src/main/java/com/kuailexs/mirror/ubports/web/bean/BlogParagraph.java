@@ -55,10 +55,10 @@ public class BlogParagraph {
     private String reviewHtml;
 
     @Column(name = "google_translated_")
-    private Integer googleTranslated = 0;
+    private Integer googleTranslated ;
 
     @Column(name = "youdao_translated_")
-    private Integer youdaoTranslated = 0;
+    private Integer youdaoTranslated ;
 
 
 }

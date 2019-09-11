@@ -123,6 +123,8 @@ public class SyncUbportsBlog {
                     blogParagraph.setSort(j+1);
                     blogParagraph.setOriginalHtml(element1.toString());
                     blogParagraph.setOriginalText(element1.text());
+                    blogParagraph.setGoogleTranslated(0);
+                    blogParagraph.setYoudaoTranslated(0);
                     blogParagraphList.add(blogParagraph);
                 }
             }
