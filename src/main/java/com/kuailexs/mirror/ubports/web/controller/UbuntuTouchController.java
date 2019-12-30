@@ -46,10 +46,18 @@ public class UbuntuTouchController {
     }
 
     @RequestMapping(value = "blog/list")
-    public void blogList( Blog blog,Integer pageNum,Integer pageSize){
+    public String blogList( Model model ,Blog blog,Integer pageNum,Integer pageSize){
+        if(pageNum == null || pageNum < 1){
+            pageNum =1;
+        }
+        if(pageSize == null || pageSize < 1){
+            pageSize =10;
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> list =  blogService.list(blog);
         PageInfo<Blog> page = new PageInfo<Blog>(list);
+        model.addAttribute("page",page);
+        return "mirror/ubports/index";
     }
 
     @RequestMapping(value = "blog/{id}")
