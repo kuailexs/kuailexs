@@ -3,33 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>快乐相随</title>
+    <link rel="stylesheet" th:href="@{/mirror.ubports/blog.css}" type="text/css" />
 </head>
 <body>
-<div class="mirror-ubports-blog-wrap">
-    <div class="col-md-4">
-        <div class="card">
-            <a href="/zh_CN/blog/1/post/ubuntu-touch-q-a-54-236">
-                <div class="o_blog_cover_container cover container-fluid cover_narrow o_list_cover">
-                    <div class="o_blog_cover_component o_blog_cover_image" style="background-image: url(/web/image/1458/carousel-connected-1920.jpg?access_token=36f8a065-5257-448e-856d-b26ce97e5243);"></div>
-                    <div class="o_blog_cover_component o_blog_cover_filter " style="opacity: 0.0;"></div>
-                    <div class="card_date bg-alpha text-center">
-                        <span data-oe-original="2019-07-17 16:48:08" class="h6 o_not_editable">七月</span>
-                        <br>
-                        <span data-oe-original="2019-07-17 16:48:08" class="h3 o_not_editable">17</span>
-                        <br>
-                        <span data-oe-original="2019-07-17 16:48:08" class="h6 o_not_editable">2019</span>
-                    </div>
-                </div>
+    <div class="mirror-ubports-blog-wrap">
+        <div th:each="blog,memberStat:${page.list}" class="card-body">
+            <a th:href="@{/mirror.ubports/blog/}+${blog.id}">
+                <h4 th:text="${blog.blogTitle}">Ubuntu Touch Q&amp;A 54</h4>
             </a>
-            <div class="card-body">
-                <a href="/zh_CN/blog/1/post/ubuntu-touch-q-a-54-236">
-                    <h4>Ubuntu Touch Q&amp;A 54</h4>
-                </a>
-                <p class="hidden-sm hidden-xs">OTA-10 Sprint</p>
-                <a class="btn btn-primary hidden-sm hidden-xs" href="/zh_CN/blog/1/post/ubuntu-touch-q-a-54-236" style="position: relative; overflow: hidden;">Read More</a>
-            </div>
+            <p class="hidden-sm hidden-xs"  th:text="${blog.subtitle}">OTA-10 Sprint</p>
         </div>
+        <div style="clear: both"></div>
     </div>
-</div>
+    <div class="mirror-ubports-blog-wrap">
+        <!--   引入分页 -->
+        <div id="page" th:attr="url=@{/mirror.ubports/blog/list(type=${type})}"></div>
+        <div th:replace="page::myPage"></div>
+    </div>
 </body>
 </html>

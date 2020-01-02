@@ -51,12 +51,13 @@ public class UbuntuTouchController {
             pageNum =1;
         }
         if(pageSize == null || pageSize < 1){
-            pageSize =10;
+            pageSize =12;
         }
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> list =  blogService.list(blog);
         PageInfo<Blog> page = new PageInfo<Blog>(list);
         model.addAttribute("page",page);
+        model.addAttribute("type",blog.getType());
         return "mirror/ubports/index";
     }
 

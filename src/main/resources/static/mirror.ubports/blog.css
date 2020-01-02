@@ -6,3 +6,9 @@ div.mirror-ubports-blog-wrap{
 div.mirror-ubports-blog-wrap .blog_title{
     text-align: center;
 }
+div.mirror-ubports-blog-wrap .card-body{
+    border: solid 1px #e84d17;
+    width: 30%;
+    padding-left: 20px;
+    float: left;
+}

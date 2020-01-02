@@ -1,0 +1,50 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- 定一个碎片名称为myPage -->
+<head th:fragment="myPage">
+    <link rel="stylesheet" th:href="@{/plugins/jquery-1.11.3/style.css}" type="text/css"/>
+    <script th:src="@{/plugins/jquery-1.11.3/jquery.min.js}"></script>
+    <script th:src="@{/plugins/jquery-1.11.3/jquery.paginate.js}"></script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var count = [[${page.pages}]];
+            var start = [[${page.pageNum}]];
+            var url = $("#page").attr('url'); //获取请求的url
+            if (count <= 1) {
+                $("#page").hide();
+            } else {
+                $("#page").show();
+            }
+            $("#page").paginate({
+                count: count,//总页数
+                start: start,//当前页码
+                display: 10,   //设置每页显示页码数
+                border: true,
+                border_color: '#B0B0CC',//border颜色
+                text_color: '#5C6C90',//字体颜色
+                background_color: '#FAFFFF',
+                border_hover_color: '#000E53',
+                text_hover_color: '#fff',
+                background_hover_color: '#2F6BA7',
+                images: false,
+                mouse: 'press',
+                onChange: function (page_index) {
+
+                    jumpUrl(page_index, url);
+
+                    //这里如果使用异步刷新 直接调用异步方法如 ajaxQuery（page_index）,注意使用异步方法后重新初始化插件
+                }
+            });
+        });
+        function jumpUrl(curPage, url) {
+            var tourl;
+            if (url.indexOf('?') > 0)
+                tourl = url + '&pageNum=' + curPage;
+            else
+                tourl = url + '?pageNum=' + curPage;
+            window.location.href = tourl;
+        }
+    </script>
+</head>
+</html>
