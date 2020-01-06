@@ -32,8 +32,8 @@ public class IndexController {
     /**
      * 首页
      */
-    @RequestMapping(value = {"index.html","/"})
-    public String indexHtml(){
-        return "kuailexs/index";
-    }
+//    @RequestMapping(value = {"index.html","/"})
+//    public String indexHtml(){
+//        return "kuailexs/index";
+//    }
 }
