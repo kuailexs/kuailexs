@@ -1,4 +1,4 @@
-package com.kuailexs.mirror.ubports.web.vo;
+package com.kuailexs.mirror.ubports.web.bean.view;
 
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;

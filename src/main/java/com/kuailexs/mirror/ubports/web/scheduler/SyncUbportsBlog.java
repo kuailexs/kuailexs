@@ -5,8 +5,8 @@ import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
-import com.kuailexs.mirror.ubports.web.vo.BlogSectionVo;
-import com.kuailexs.mirror.ubports.web.vo.BlogVo;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,7 +33,7 @@ public class SyncUbportsBlog {
 
     private final String hostPath = "https://ubports.com";
 
-    @Scheduled(fixedDelay = 10 * 1000)
+    @Scheduled(fixedDelay = 120 * 1000)
     public void onTimeSyncUbportsBlog() {
         syncUbportsBlog(BlogType.QA);
         syncUbportsBlog(BlogType.BLOG);

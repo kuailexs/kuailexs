@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>快乐相随</title>
-    <link rel="stylesheet" th:href="@{/kuailexs/index/index.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/kuailexs/index/index.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/plugins/layui-v2.5.5/css/layui.css}">
 </head>
-<body>
-    <div class="index-wrap">
-        <nav>
-            <a th:href="@{/mirror.ubports/blog/list?type=2}">ubports 博客翻译</a>
-            <a th:href="@{/mirror.ubports/blog/list?type=1}">ubports 问答翻译</a>
-        </nav>
+<body class="layui-layout-body">
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><a th:href="@{/mirror.ubports/blog/listPage?type=2}">ubports 博客翻译</a></div>
+                <div class="layui-card-body">
+                    ubports.com 站点下的博客栏目下的 Blogs
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><a th:href="@{/mirror.ubports/blog/listPage?type=1}">ubports 问答翻译</a></div>
+                <div class="layui-card-body">
+                    ubports.com 站点下的博客栏目下的 Ubuntu Touch Q&A
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<script th:attr="src=@{/plugins/layui-v2.5.5/layui.all.js}"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ import com.kuailexs.common.service.impl.BaseServiceImpl;
 import com.kuailexs.mirror.ubports.web.mapper.BlogParagraphMapper;
 import com.kuailexs.mirror.ubports.web.mapper.BlogSectionMapper;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
-import com.kuailexs.mirror.ubports.web.vo.BlogSectionVo;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

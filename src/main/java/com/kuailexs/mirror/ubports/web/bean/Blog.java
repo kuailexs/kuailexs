@@ -1,5 +1,6 @@
 package com.kuailexs.mirror.ubports.web.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -37,6 +38,7 @@ public class Blog {
     @Column(name = "date_str_")
     private String dateStr;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Column(name = "create_date_")
     private Date createDate;
 

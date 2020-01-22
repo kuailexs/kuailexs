@@ -7,7 +7,7 @@ import com.kuailexs.mirror.ubports.web.bean.BlogSection;
 import com.kuailexs.mirror.ubports.web.mapper.BlogMapper;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
-import com.kuailexs.mirror.ubports.web.vo.BlogVo;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

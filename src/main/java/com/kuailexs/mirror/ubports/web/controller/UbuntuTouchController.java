@@ -5,16 +5,14 @@ import com.github.pagehelper.PageInfo;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
+import com.kuailexs.mirror.ubports.web.bean.view.ResultPage;
 import com.kuailexs.mirror.ubports.web.service.BlogParagraphService;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
-import com.kuailexs.mirror.ubports.web.vo.BlogSectionVo;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -45,20 +43,31 @@ public class UbuntuTouchController {
         System.out.println(blog_content);
     }
 
-    @RequestMapping(value = "blog/list")
-    public String blogList( Model model ,Blog blog,Integer pageNum,Integer pageSize){
-        if(pageNum == null || pageNum < 1){
-            pageNum =1;
-        }
-        if(pageSize == null || pageSize < 1){
-            pageSize =12;
-        }
-        PageHelper.startPage(pageNum, pageSize);
-        List<Blog> list =  blogService.list(blog);
-        PageInfo<Blog> page = new PageInfo<Blog>(list);
-        model.addAttribute("page",page);
-        model.addAttribute("type",blog.getType());
+    @RequestMapping(value = "blog/listPage")
+    public String blogPage(Model model,Integer type){
+        model.addAttribute("type",type);
         return "mirror/ubports/index";
+    }
+
+    @RequestMapping(value = "blog/list")
+    @ResponseBody
+    public ResultPage<Blog> blogList(Model model , Blog blog, Integer page, Integer limit){
+        if(page == null || page < 1){
+            page =1;
+        }
+        if(limit == null || limit < 1){
+            limit =12;
+        }
+        PageHelper.startPage(page, limit,"date_ desc");
+        List<Blog> list =  blogService.list(blog);
+        PageInfo<Blog> pageInfo = new PageInfo<>(list);
+        //返回数据
+        ResultPage<Blog> resultPage = new ResultPage<>();
+        resultPage.setCode(0);
+        resultPage.setMsg("成功");
+        resultPage.setData(pageInfo.getList());
+        resultPage.setCount(pageInfo.getTotal());
+        return resultPage;
     }
 
     @RequestMapping(value = "blog/{id}")
