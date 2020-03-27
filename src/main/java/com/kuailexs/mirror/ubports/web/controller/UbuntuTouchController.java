@@ -5,16 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
-import com.kuailexs.mirror.ubports.web.bean.Device;
-import com.kuailexs.mirror.ubports.web.bean.view.ResultPage;
+import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
+import com.kuailexs.common.bean.ResultPage;
 import com.kuailexs.mirror.ubports.web.service.BlogParagraphService;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
-import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
-import com.kuailexs.mirror.ubports.web.service.DeviceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -72,12 +72,7 @@ public class UbuntuTouchController {
         List<Blog> list =  blogService.list(blog);
         PageInfo<Blog> pageInfo = new PageInfo<>(list);
         //返回数据
-        ResultPage<Blog> resultPage = new ResultPage<>();
-        resultPage.setCode(0);
-        resultPage.setMsg("成功");
-        resultPage.setData(pageInfo.getList());
-        resultPage.setCount(pageInfo.getTotal());
-        return resultPage;
+        return ResultPage.success(pageInfo.getList(),pageInfo.getTotal());
     }
 
     /**

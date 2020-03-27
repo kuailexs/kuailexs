@@ -1,4 +1,4 @@
-package com.kuailexs.mirror.ubports.web.bean.view;
+package com.kuailexs.common.bean;
 
 import lombok.Data;
 
@@ -33,5 +33,24 @@ public class ResultPage<T>{
     public static class TotalRow {
         private String score;
         private String experience;
+    }
+
+    public static ResultPage success(){
+        return success(null,0L);
+    }
+    public static ResultPage success(List data,Long count){
+        ResultPage result = new ResultPage();
+        result.code = Result.SUCCESS;
+        result.msg = "成功";
+        result.data = data;
+        result.count = count;
+        return result;
+    }
+    public static ResultPage fail(){
+        ResultPage result = new ResultPage();
+        result.code = Result.FAIL;
+        result.msg = "失败";
+        result.data = null;
+        return result;
     }
 }
