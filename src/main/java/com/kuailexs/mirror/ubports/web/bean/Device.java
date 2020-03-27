@@ -1,6 +1,7 @@
 package com.kuailexs.mirror.ubports.web.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kuailexs.common.annotation.TableSql;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -17,6 +18,15 @@ import java.util.Date;
  */
 @Data
 @Table(name = "mirror_ubports_device")
+@TableSql("CREATE TABLE `mirror_ubports_device` (\n" +
+        "  `id_` int(11) NOT NULL AUTO_INCREMENT,\n" +
+        "  `device_name_` varchar(200) DEFAULT NULL COMMENT '设备名',\n" +
+        "  `source_remark_` varchar(1024) DEFAULT NULL,\n" +
+        "  `download_remark_` varchar(1024) DEFAULT NULL,\n" +
+        "  `remark_` text,\n" +
+        "  `create_date_` datetime DEFAULT NULL,\n" +
+        "  PRIMARY KEY (`id_`)\n" +
+        ") ")
 public class Device {
 
     @Id

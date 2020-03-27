@@ -1,6 +1,7 @@
 package com.kuailexs.mirror.ubports.web.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kuailexs.common.annotation.TableSql;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -17,6 +18,19 @@ import java.util.Date;
  */
 @Data
 @Table(name = "mirror_ubports_blog")
+@TableSql("CREATE TABLE `mirror_ubports_blog` (\n" +
+        "  `id_` int(11) NOT NULL AUTO_INCREMENT,\n" +
+        "  `blog_title_` varchar(512) DEFAULT NULL,\n" +
+        "  `subtitle_` varchar(200) DEFAULT NULL,\n" +
+        "  `date_` varchar(100) DEFAULT NULL,\n" +
+        "  `date_str_` varchar(100) DEFAULT NULL,\n" +
+        "  `create_date_` datetime DEFAULT NULL,\n" +
+        "  `blog_title_zh_` varchar(512) DEFAULT NULL,\n" +
+        "  `subtitle_zh_` varchar(200) DEFAULT NULL,\n" +
+        "  `type_` int(11) DEFAULT NULL,\n" +
+        "  `url_` varchar(512) DEFAULT NULL,\n" +
+        "  PRIMARY KEY (`id_`)\n" +
+        ") ")
 public class Blog {
 
     @Id

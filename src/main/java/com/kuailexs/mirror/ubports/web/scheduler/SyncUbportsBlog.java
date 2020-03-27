@@ -33,7 +33,8 @@ public class SyncUbportsBlog {
 
     private final String hostPath = "https://ubports.com";
 
-    @Scheduled(fixedDelay = 120 * 1000)
+    //间隔 10 小时
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 10)
     public void onTimeSyncUbportsBlog() {
         syncUbportsBlog(BlogType.QA);
         syncUbportsBlog(BlogType.BLOG);

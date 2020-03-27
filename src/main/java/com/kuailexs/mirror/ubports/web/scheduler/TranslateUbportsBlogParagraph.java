@@ -37,6 +37,7 @@ public class TranslateUbportsBlogParagraph {
     @Resource
     BlogParagraphService blogParagraphService;
 
+    //间隔 1 分钟
     @Scheduled(fixedDelay = 60 * 1000)
     public void translateBlogParagraph() {
         try {
@@ -53,6 +54,9 @@ public class TranslateUbportsBlogParagraph {
                 dist.setGoogleTranslated(1);
                 dist.setLastUpdateTime(new Date());
                 blogParagraphService.update(dist);
+            }else {
+                //没有需要翻译的数据了 等待 12小时
+                Thread.sleep(1000 * 60 * 60 * 12);
             }
         } catch (Exception e) {
             e.printStackTrace();

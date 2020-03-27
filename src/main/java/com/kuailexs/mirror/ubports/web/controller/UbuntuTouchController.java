@@ -37,8 +37,7 @@ public class UbuntuTouchController {
     BlogSectionService blogSectionService;
     @Resource
     BlogParagraphService blogParagraphService;
-    @Resource
-    DeviceService deviceService;
+
 
     /**
      * 列表页面
