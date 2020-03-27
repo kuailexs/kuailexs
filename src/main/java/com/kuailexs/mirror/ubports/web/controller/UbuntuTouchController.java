@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
+import com.kuailexs.mirror.ubports.web.bean.Device;
 import com.kuailexs.mirror.ubports.web.bean.view.ResultPage;
 import com.kuailexs.mirror.ubports.web.service.BlogParagraphService;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
 import com.kuailexs.mirror.ubports.web.bean.view.BlogSectionVo;
+import com.kuailexs.mirror.ubports.web.service.DeviceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,20 +37,29 @@ public class UbuntuTouchController {
     BlogSectionService blogSectionService;
     @Resource
     BlogParagraphService blogParagraphService;
+    @Resource
+    DeviceService deviceService;
 
-    @RequestMapping(value = "saveQA")
-    public void saveQA( String blog_post_name,String blog_title,String blog_content){
-        System.out.println(blog_post_name);
-        System.out.println(blog_title);
-        System.out.println(blog_content);
-    }
-
+    /**
+     * 列表页面
+     * @param model
+     * @param type
+     * @return
+     */
     @RequestMapping(value = "blog/listPage")
     public String blogPage(Model model,Integer type){
         model.addAttribute("type",type);
         return "mirror/ubports/index";
     }
 
+    /**
+     * 内容列表
+     * @param model
+     * @param blog
+     * @param page
+     * @param limit
+     * @return
+     */
     @RequestMapping(value = "blog/list")
     @ResponseBody
     public ResultPage<Blog> blogList(Model model , Blog blog, Integer page, Integer limit){
@@ -70,6 +81,12 @@ public class UbuntuTouchController {
         return resultPage;
     }
 
+    /**
+     * 详情展示页
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "blog/{id}")
     public String blog(Model model , @PathVariable Integer id){
         Blog blog = blogService.getOne(id);

@@ -53,3 +53,14 @@ CREATE TABLE `mirror_ubports_blog_section` (
   PRIMARY KEY (`id_`),
   KEY `blog_id_` (`blog_id_`)
 ) ;
+
+DROP TABLE IF EXISTS `mirror_ubports_device`;
+CREATE TABLE `mirror_ubports_device` (
+  `id_` int(11) NOT NULL,
+  `device_name_` varchar(200) DEFAULT NULL COMMENT '设备名',
+  `source_remark_` varchar(1024) DEFAULT NULL,
+  `download_remark_` varchar(1024) DEFAULT NULL,
+  `remark_` text,
+  `create_date_` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

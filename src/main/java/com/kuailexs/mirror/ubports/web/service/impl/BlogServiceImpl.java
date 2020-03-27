@@ -21,7 +21,7 @@ import java.util.List;
  * @Modified By：
  * @Version:
  */
-@Service("blogService")
+@Service
 public class BlogServiceImpl extends BaseServiceImpl<Blog,Integer> implements BlogService {
 
     @Autowired

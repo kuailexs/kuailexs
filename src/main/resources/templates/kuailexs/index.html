@@ -6,9 +6,17 @@
     <link rel="stylesheet" th:href="@{/kuailexs/index/index.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/plugins/layui-v2.5.5/css/layui.css}">
 </head>
-<body class="layui-layout-body">
-<div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
+<body style="padding: 20px; background-color: #F2F2F2;">
+<div  class="layui-container">
+    <div class="layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">快乐相随-个人小站</div>
+                <div class="layui-card-body">
+                    暂时放的ubuntu touch ubports 相关资讯，以后会改为子模块
+                </div>
+            </div>
+        </div>
         <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header"><a th:href="@{/mirror.ubports/blog/listPage?type=2}">ubports 博客翻译</a></div>
@@ -25,7 +33,17 @@
                 </div>
             </div>
         </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><a th:href="@{/mirror.ubports/device/listPage}">第三方适配</a></div>
+                <div class="layui-card-body">
+                    包含 ubports 未收录的适配信息。欢迎提交新记录。请加Q群 ：Ubuntu phone  450712533
+                </div>
+            </div>
+        </div>
+        <div class="layui-clear"></div>
     </div>
+    <div class="layui-clear"></div>
 </div>
 <script th:attr="src=@{/plugins/layui-v2.5.5/layui.all.js}"></script>
 </body>

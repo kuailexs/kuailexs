@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>第三方适配列表</title>
+    <link rel="stylesheet" th:href="@{/plugins/layui-v2.5.5/css/layui.css}">
+</head>
+<body style="padding: 20px; background-color: #F2F2F2;">
+<div class="layui-container">
+    <div class=" layui-col-space15" id="device_list">
+    </div>
+    <div class="layui-clear"></div>
+</div>
+<script th:attr="src=@{/plugins/jquery-1.11.3/jquery.min.js}"></script>
+<script th:attr="src=@{/plugins/layui-v2.5.5/layui.all.js}"></script>
+<script>
+    var ctxPath = '[[@{/}]]';
+    var type = '[[${type}]]';
+    console.info(ctxPath);
+    //第一个实例
+    layui.flow.load({
+        elem: '#device_list' //指定列表容器
+        ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+            var lis = [];
+            //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+            $.get(ctxPath + 'mirror.ubports/device/list?page='+page, function(res){
+                //假设你的列表返回在data集合中
+                layui.each(res.data, function(index, item){
+                    lis.push(getHtml(item));
+                });
+
+                //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                next(lis.join(''), page < ( res.count / 12 ));
+            });
+        }
+    });
+    function getHtml(one) {
+        var html = "";
+
+        html += "   <div class=\"layui-col-md6\">\n" +
+                "        <div class=\"layui-card\" style='min-height: 320px'>\n" +
+                "            <div class=\"layui-card-header\">"+one.deviceName+"</div>\n" +
+                "            <div class=\"layui-card-body\">\n" +
+                "               源码地址 <br/>" +
+                                one.sourceRemark + "<br/>" +
+                "               <hr class=\"layui-bg-orange\">" +
+                "               下载地址 <br/>" +
+                                one.downloadRemark + "<br/>" +
+                "               <hr class=\"layui-bg-orange\">" +
+                "               其它说明 <br/>" +
+                                one.remark + "<br/>" +
+                "               <hr class=\"layui-bg-orange\">" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "    </div>";
+        return html;
+    }
+</script>
+</body>
+</html>
