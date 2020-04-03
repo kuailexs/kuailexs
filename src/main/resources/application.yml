@@ -18,15 +18,30 @@ spring:
     suspect-timeout: 60
     remove-abandoned-timeout: 90
     type: com.alibaba.druid.pool.DruidDataSource
-
+# thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    cache: false
 #  jackson:
 #    default-property-inclusion: NON_NULL
 mybatis:
 #  type-aliases-package:com.neo.entity
   configuration:
     mapUnderscoreToCamelCase: true
+  mapper-locations: classpath:mapper/*.xml
 
 #logging
 logging:
   level:
     root: debug
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
