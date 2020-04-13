@@ -37,7 +37,8 @@ mybatis:
 #logging
 logging:
   level:
-    root: debug
+    root: error
+    com.kuailexs: debug
 
 #pagehelper
 pagehelper:

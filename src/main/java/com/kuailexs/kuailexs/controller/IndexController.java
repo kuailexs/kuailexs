@@ -19,6 +19,15 @@ public class IndexController {
      */
     @RequestMapping(value = {"index.html","/"})
     public String indexHtml(){
-        return "kuailexs/index";
+        //return "kuailexs/index";
+        //return "mirror/ubports/index";//默认跳ubports博客翻译
+        return "redirect:mirror.ubports/blog/listPage";//默认跳ubports博客翻译
+    }
+    /**
+     * 关于
+     */
+    @RequestMapping(value = {"about.html","about"})
+    public String about(){
+        return "about";
     }
 }

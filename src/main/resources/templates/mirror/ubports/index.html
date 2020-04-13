@@ -5,8 +5,22 @@
     <title>ubports 博文列表</title>
     <link rel="stylesheet" th:href="@{/plugins/layui-v2.5.5/css/layui.css}">
 </head>
-<body style="padding: 20px; background-color: #F2F2F2;" class="layui-layout-body">
-<div >
+<body style="padding: 20px; background-color: #F2F2F2;" >
+<div th:replace="snippet::snippet_header_nav('ubt_blog')"></div>
+<div  class="layui-container">
+    <div class="layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">ubports 博文列表</div>
+                <div class="layui-card-body">
+                    <p>ubports.com 站点下的博客栏目下的 Blogs 和 Ubuntu Touch Q&A</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-clear"></div>
+</div>
+<div class="layui-container">
     <table id="mirror_ubports" lay-filter="mirror_ubports"></table>
 </div>
 <script th:attr="src=@{/plugins/layui-v2.5.5/layui.all.js}"></script>

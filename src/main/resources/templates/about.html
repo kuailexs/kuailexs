@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ubports 博文列表</title>
+    <link rel="stylesheet" th:href="@{/plugins/layui-v2.5.5/css/layui.css}">
+</head>
+<body style="padding: 20px; background-color: #F2F2F2;" >
+<div th:replace="snippet::snippet_header_nav('about')"></div>
+<div  class="layui-container">
+    <div class="layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">快乐相随-个人小站</div>
+                <div class="layui-card-body">
+                    <p>
+                        现在主要 放的 ubuntu touch ubports 相关资讯<br/>
+                        ubports 博文列表 ： ubports.com 站点下的博客栏目下的 Blogs 和 Ubuntu Touch Q&A
+                    </p>
+                    <hr class="layui-bg-gray">
+                    <p>
+                        博客模块代码来自：
+                        <a href="https://github.com/zhisheng17/blog">https://github.com/zhisheng17/blog</a><br/>
+                        根据该项目调整而来
+                    </p>
+                    <hr class="layui-bg-gray">
+                    <p>其它模块正在测试中</p>
+                    <hr class="layui-bg-gray">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-clear"></div>
+</div>
+<script th:attr="src=@{/plugins/layui-v2.5.5/layui.all.js}"></script>
+</body>
+</html>
