@@ -1,4 +1,4 @@
-package com.kuailexs.blog.interceptor;
+package com.kuailexs.common.interceptor;
 
 
 import com.kuailexs.blog.utils.TaleUtils;
