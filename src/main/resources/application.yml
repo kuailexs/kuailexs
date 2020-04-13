@@ -32,7 +32,7 @@ mybatis:
 #  type-aliases-package:com.neo.entity
   configuration:
     mapUnderscoreToCamelCase: true
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
 
 #logging
 logging:

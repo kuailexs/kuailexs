@@ -40,8 +40,8 @@ import java.util.List;
  * Created by Administrator on 2017/3/8 008.
  */
 @Controller
-public class IndexController extends BaseController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+public class BlogIndexController extends BaseController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlogIndexController.class);
 
     @Resource
     private IContentService contentService;
@@ -55,15 +55,6 @@ public class IndexController extends BaseController {
     @Resource
     private ISiteService siteService;
 
-    /**
-     * 首页
-     *
-     * @return
-     */
-    @GetMapping(value = {"/", "index"})
-    public String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "12") int limit) {
-        return this.index(request, 1, limit);
-    }
 
     /**
      * 首页分页
