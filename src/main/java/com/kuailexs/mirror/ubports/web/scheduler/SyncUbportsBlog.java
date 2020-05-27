@@ -10,6 +10,7 @@ import com.kuailexs.mirror.ubports.web.bean.view.BlogVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.*;
 
 /**
@@ -77,7 +80,8 @@ public class SyncUbportsBlog {
 
             //先耍1s再干活
             sleep(1000);
-
+            //Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("127.0.0.1", 5080));
+            //Document document = Jsoup.connect(thisHttpPath).proxy(proxy).get();
             Document document = Jsoup.connect(thisHttpPath).get();
             Element element = document.selectFirst("div.blog_title");
             String blog_post_name = element.selectFirst("#blog_post_name").text();
@@ -114,16 +118,36 @@ public class SyncUbportsBlog {
                 blogSection.setBlogParagraphList(blogParagraphList);
 
                 //段落
-                Elements elements = blog_content.children();
-                for ( int j = 0 ; j < elements.size() ; j++ ) {
-                    Element element1 = elements.get(j);
+//                Elements elements = blog_content.children();
+//                for ( int j = 0 ; j < elements.size() ; j++ ) {
+//                    Element element1 = elements.get(j);
+//                    BlogParagraph blogParagraph = new BlogParagraph();
+//                    blogParagraph.setBlogId(blog.getId());
+//                    blogParagraph.setSectionId(blogSection.getId());
+//                    blogParagraph.setCreateTime(thisTime);
+//                    blogParagraph.setSort(j+1);
+//                    blogParagraph.setOriginalHtml(element1.toString());
+//                    blogParagraph.setOriginalText(element1.text());
+//                    blogParagraph.setGoogleTranslated(0);
+//                    blogParagraph.setYoudaoTranslated(0);
+//                    blogParagraphList.add(blogParagraph);
+//                }
+                List<Node>  nodeList = blog_content.childNodes();
+                for ( int j = 0 ; j < nodeList.size() ; j++ ) {
                     BlogParagraph blogParagraph = new BlogParagraph();
+                    Node node = nodeList.get(j);
+                    if(node instanceof Element){
+                        Element element1 = (Element) node;
+                        blogParagraph.setOriginalHtml(element1.toString());
+                        blogParagraph.setOriginalText(element1.text());
+                    }else {
+                        blogParagraph.setOriginalHtml(node.toString());
+                        blogParagraph.setOriginalText(node.toString());
+                    }
                     blogParagraph.setBlogId(blog.getId());
                     blogParagraph.setSectionId(blogSection.getId());
                     blogParagraph.setCreateTime(thisTime);
-                    blogParagraph.setSort(j+1);
-                    blogParagraph.setOriginalHtml(element1.toString());
-                    blogParagraph.setOriginalText(element1.text());
+                    blogParagraph.setSort(j + 1);
                     blogParagraph.setGoogleTranslated(0);
                     blogParagraph.setYoudaoTranslated(0);
                     blogParagraphList.add(blogParagraph);
