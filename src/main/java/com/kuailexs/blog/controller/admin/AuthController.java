@@ -9,7 +9,7 @@ import com.kuailexs.blog.modal.Vo.UserVo;
 import com.kuailexs.blog.service.ILogService;
 import com.kuailexs.blog.service.IUserService;
 import com.kuailexs.blog.utils.Commons;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

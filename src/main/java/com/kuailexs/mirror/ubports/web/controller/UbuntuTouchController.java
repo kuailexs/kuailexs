@@ -2,6 +2,8 @@ package com.kuailexs.mirror.ubports.web.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kuailexs.common.annotation.Authority;
+import com.kuailexs.common.annotation.AuthorityCode;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
@@ -109,6 +111,7 @@ public class UbuntuTouchController {
      */
     @RequestMapping(value = "blog/{id}/del")
     @ResponseBody
+    @Authority(AuthorityCode.ADMIN)
     public String deleteBlog(Model model , @PathVariable Integer id){
         blogService.deleteBlog(id);
         return "成功";

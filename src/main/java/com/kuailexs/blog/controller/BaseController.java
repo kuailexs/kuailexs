@@ -1,7 +1,8 @@
 package com.kuailexs.blog.controller;
 
 import com.kuailexs.blog.modal.Vo.UserVo;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.bean.User;
+import com.kuailexs.common.tools.TaleUtils;
 import com.kuailexs.blog.utils.MapCache;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +40,12 @@ public abstract class BaseController {
      * @param request
      * @return
      */
-    public UserVo user(HttpServletRequest request) {
+    public User user(HttpServletRequest request) {
         return TaleUtils.getLoginUser(request);
     }
 
     public Integer getUid(HttpServletRequest request){
-        return this.user(request).getUid();
+        return this.user(request).getId();
     }
 
     public String render_404() {

@@ -14,6 +14,7 @@ import com.kuailexs.blog.modal.Vo.UserVo;
 import com.kuailexs.blog.service.IContentService;
 import com.kuailexs.blog.service.ILogService;
 import com.kuailexs.blog.service.IMetaService;
+import com.kuailexs.common.bean.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -100,8 +101,8 @@ public class ArticleController extends BaseController {
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo publishArticle(ContentVo contents, HttpServletRequest request) {
-        UserVo users = this.user(request);
-        contents.setAuthorId(users.getUid());
+        User users = this.user(request);
+        contents.setAuthorId(users.getId());
         contents.setType(Types.ARTICLE.getType());
         if (!StringUtils.hasText(contents.getCategories())) {
             contents.setCategories("默认分类");
@@ -130,8 +131,8 @@ public class ArticleController extends BaseController {
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo modifyArticle(ContentVo contents,HttpServletRequest request) {
-        UserVo users = this.user(request);
-        contents.setAuthorId(users.getUid());
+        User users = this.user(request);
+        contents.setAuthorId(users.getId());
         contents.setType(Types.ARTICLE.getType());
         try {
             contentsService.updateArticle(contents);

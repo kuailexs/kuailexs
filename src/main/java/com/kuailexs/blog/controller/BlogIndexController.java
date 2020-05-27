@@ -17,7 +17,7 @@ import com.kuailexs.blog.exception.TipException;
 import com.kuailexs.blog.modal.Vo.CommentVo;
 import com.kuailexs.blog.modal.Vo.MetaVo;
 import com.kuailexs.blog.utils.PatternKit;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import com.vdurmont.emoji.EmojiParser;
 import com.kuailexs.blog.modal.Vo.ContentVo;
 import org.apache.commons.lang3.StringUtils;

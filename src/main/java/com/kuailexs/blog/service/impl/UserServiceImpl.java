@@ -4,7 +4,7 @@ import com.kuailexs.blog.dao.UserVoMapper;
 import com.kuailexs.blog.service.IUserService;
 import com.kuailexs.blog.exception.TipException;
 import com.kuailexs.blog.modal.Vo.UserVo;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import com.kuailexs.blog.modal.Vo.UserVoExample;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

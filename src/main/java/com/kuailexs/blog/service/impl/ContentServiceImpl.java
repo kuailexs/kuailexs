@@ -13,7 +13,7 @@ import com.kuailexs.blog.service.IContentService;
 import com.kuailexs.blog.service.IMetaService;
 import com.kuailexs.blog.service.IRelationshipService;
 import com.kuailexs.blog.utils.DateKit;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import com.kuailexs.blog.utils.Tools;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;

@@ -2,6 +2,7 @@ package com.kuailexs.blog.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.kuailexs.blog.modal.Bo.RestResponseBo;
+import com.kuailexs.common.bean.User;
 import com.vdurmont.emoji.EmojiParser;
 import com.kuailexs.blog.controller.BaseController;
 import com.kuailexs.blog.exception.TipException;
@@ -9,7 +10,7 @@ import com.kuailexs.blog.modal.Vo.CommentVo;
 import com.kuailexs.blog.modal.Vo.CommentVoExample;
 import com.kuailexs.blog.modal.Vo.UserVo;
 import com.kuailexs.blog.service.ICommentService;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +43,10 @@ public class CommentController extends BaseController {
     @GetMapping(value = "")
     public String index(@RequestParam(value = "page", defaultValue = "1") int page,
                         @RequestParam(value = "limit", defaultValue = "15") int limit, HttpServletRequest request) {
-        UserVo users = this.user(request);
+        User users = this.user(request);
         CommentVoExample commentVoExample = new CommentVoExample();
         commentVoExample.setOrderByClause("coid desc");
-        commentVoExample.createCriteria().andAuthorIdNotEqualTo(users.getUid());
+        commentVoExample.createCriteria().andAuthorIdNotEqualTo(users.getId());
         PageInfo<CommentVo> commentsPaginator = commentsService.getCommentsWithPage(commentVoExample,page, limit);
         request.setAttribute("comments", commentsPaginator);
         return "admin/comment_list";
@@ -121,18 +122,18 @@ public class CommentController extends BaseController {
         if(null == c){
             return RestResponseBo.fail("不存在该评论");
         }
-        UserVo users = this.user(request);
+        User users = this.user(request);
         content = TaleUtils.cleanXSS(content);
         content = EmojiParser.parseToAliases(content);
 
         CommentVo comments = new CommentVo();
-        comments.setAuthor(users.getUsername());
-        comments.setAuthorId(users.getUid());
+        comments.setAuthor(users.getName());
+        comments.setAuthorId(users.getId());
         comments.setCid(c.getCid());
         comments.setIp(request.getRemoteAddr());
-        comments.setUrl(users.getHomeUrl());
+        //comments.setUrl(users.getHomeUrl());
         comments.setContent(content);
-        comments.setMail(users.getEmail());
+        //comments.setMail(users.getEmail());
         comments.setParent(coid);
         try {
             commentsService.insertComment(comments);

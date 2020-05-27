@@ -1,9 +1,14 @@
-package com.kuailexs.blog.utils;
+package com.kuailexs.common.tools;
 
 import com.kuailexs.blog.constant.WebConst;
 import com.kuailexs.blog.controller.admin.AttachController;
 import com.kuailexs.blog.exception.TipException;
 import com.kuailexs.blog.modal.Vo.UserVo;
+import com.kuailexs.blog.utils.Commons;
+import com.kuailexs.blog.utils.DateKit;
+import com.kuailexs.blog.utils.Tools;
+import com.kuailexs.blog.utils.UUID;
+import com.kuailexs.common.bean.User;
 import org.apache.commons.lang3.StringUtils;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -206,12 +211,12 @@ public class TaleUtils {
      *
      * @return
      */
-    public static UserVo getLoginUser(HttpServletRequest request) {
+    public static User getLoginUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (null == session) {
             return null;
         }
-        return (UserVo) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
+        return (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
     }
 
 

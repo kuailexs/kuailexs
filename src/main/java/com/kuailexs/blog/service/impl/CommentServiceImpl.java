@@ -8,7 +8,7 @@ import com.kuailexs.blog.service.ICommentService;
 import com.kuailexs.blog.service.IContentService;
 import com.kuailexs.blog.exception.TipException;
 import com.kuailexs.blog.utils.DateKit;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.tools.TaleUtils;
 import com.kuailexs.blog.modal.Vo.CommentVo;
 import com.kuailexs.blog.modal.Vo.CommentVoExample;
 import com.kuailexs.blog.modal.Vo.ContentVo;

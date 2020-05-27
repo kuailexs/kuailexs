@@ -12,7 +12,8 @@ import com.kuailexs.blog.modal.Vo.UserVo;
 import com.kuailexs.blog.service.IAttachService;
 import com.kuailexs.blog.service.ILogService;
 import com.kuailexs.blog.utils.Commons;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.bean.User;
+import com.kuailexs.common.tools.TaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -76,8 +77,8 @@ public class AttachController extends BaseController {
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo upload(HttpServletRequest request, @RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
-        UserVo users = this.user(request);
-        Integer uid = users.getUid();
+        User users = this.user(request);
+        Integer uid = users.getId();
         List<String> errorFiles = new ArrayList<>();
         try {
             for (MultipartFile multipartFile : multipartFiles) {

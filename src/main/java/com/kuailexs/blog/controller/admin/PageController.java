@@ -12,6 +12,7 @@ import com.kuailexs.blog.controller.BaseController;
 import com.kuailexs.blog.modal.Vo.ContentVo;
 import com.kuailexs.blog.modal.Vo.ContentVoExample;
 import com.kuailexs.blog.service.IContentService;
+import com.kuailexs.common.bean.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -65,7 +66,7 @@ public class PageController extends BaseController {
                                       @RequestParam String status, @RequestParam String slug,
                                       @RequestParam(required = false) Integer allowComment, @RequestParam(required = false) Integer allowPing, HttpServletRequest request) {
 
-        UserVo users = this.user(request);
+        User users = this.user(request);
         ContentVo contents = new ContentVo();
         contents.setTitle(title);
         contents.setContent(content);
@@ -78,7 +79,7 @@ public class PageController extends BaseController {
         if (null != allowPing) {
             contents.setAllowPing(allowPing == 1);
         }
-        contents.setAuthorId(users.getUid());
+        contents.setAuthorId(users.getId());
 
         try {
             contentsService.publish(contents);
@@ -102,7 +103,7 @@ public class PageController extends BaseController {
                                         @RequestParam String status, @RequestParam String slug,
                                         @RequestParam(required = false) Integer allowComment, @RequestParam(required = false) Integer allowPing, HttpServletRequest request) {
 
-        UserVo users = this.user(request);
+        User users = this.user(request);
         ContentVo contents = new ContentVo();
         contents.setCid(cid);
         contents.setTitle(title);
@@ -116,7 +117,7 @@ public class PageController extends BaseController {
         if (null != allowPing) {
             contents.setAllowPing(allowPing == 1);
         }
-        contents.setAuthorId(users.getUid());
+        contents.setAuthorId(users.getId());
         try {
             contentsService.updateArticle(contents);
         } catch (Exception e) {

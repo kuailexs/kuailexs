@@ -14,7 +14,8 @@ import com.kuailexs.blog.modal.Vo.LogVo;
 import com.kuailexs.blog.modal.Vo.UserVo;
 import com.kuailexs.blog.service.ILogService;
 import com.kuailexs.blog.service.IUserService;
-import com.kuailexs.blog.utils.TaleUtils;
+import com.kuailexs.common.bean.User;
+import com.kuailexs.common.tools.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,10 +95,10 @@ public class IndexController extends BaseController {
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo saveProfile(@RequestParam String screenName, @RequestParam String email, HttpServletRequest request, HttpSession session) {
 
-        UserVo users = this.user(request);
+        User users = this.user(request);
         if (StringUtils.isNotBlank(screenName) && StringUtils.isNotBlank(email)) {
             UserVo temp = new UserVo();
-            temp.setUid(users.getUid());
+            temp.setUid(users.getId());
             temp.setScreenName(screenName);
             temp.setEmail(email);
             userService.updateByUid(temp);
@@ -119,12 +120,12 @@ public class IndexController extends BaseController {
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo upPwd(@RequestParam String oldPassword, @RequestParam String password, HttpServletRequest request,HttpSession session) {
-        UserVo users = this.user(request);
+        User users = this.user(request);
         if (StringUtils.isBlank(oldPassword) || StringUtils.isBlank(password)) {
             return RestResponseBo.fail("请确认信息输入完整");
         }
 
-        if (!users.getPassword().equals(TaleUtils.MD5encode(users.getUsername() + oldPassword))) {
+        if (!users.getPassword().equals(TaleUtils.MD5encode(users.getName() + oldPassword))) {
             return RestResponseBo.fail("旧密码错误");
         }
         if (password.length() < 6 || password.length() > 14) {
@@ -133,8 +134,8 @@ public class IndexController extends BaseController {
 
         try {
             UserVo temp = new UserVo();
-            temp.setUid(users.getUid());
-            String pwd = TaleUtils.MD5encode(users.getUsername() + password);
+            temp.setUid(users.getId());
+            String pwd = TaleUtils.MD5encode(users.getName() + password);
             temp.setPassword(pwd);
             userService.updateByUid(temp);
             logService.insertLog(LogActions.UP_PWD.getAction(), null, request.getRemoteAddr(), this.getUid(request));

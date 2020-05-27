@@ -1,4 +1,4 @@
-package com.kuailexs.kuailexs.bean;
+package com.kuailexs.common.bean;
 
 import com.kuailexs.common.annotation.TableSql;
 import lombok.Data;
