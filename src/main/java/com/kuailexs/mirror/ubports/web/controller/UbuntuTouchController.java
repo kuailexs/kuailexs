@@ -100,4 +100,17 @@ public class UbuntuTouchController {
         model.addAttribute("blogSectionList",blogSectionList);
         return "mirror/ubports/blog-details";
     }
+
+    /**
+     * 删除
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "blog/{id}/del")
+    @ResponseBody
+    public String deleteBlog(Model model , @PathVariable Integer id){
+        blogService.deleteBlog(id);
+        return "成功";
+    }
 }

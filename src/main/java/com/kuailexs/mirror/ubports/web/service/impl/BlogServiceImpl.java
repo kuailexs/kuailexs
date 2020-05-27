@@ -5,6 +5,8 @@ import com.kuailexs.common.mapper.MyBaseMapper;
 import com.kuailexs.common.service.impl.BaseServiceImpl;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
 import com.kuailexs.mirror.ubports.web.mapper.BlogMapper;
+import com.kuailexs.mirror.ubports.web.mapper.BlogParagraphMapper;
+import com.kuailexs.mirror.ubports.web.mapper.BlogSectionMapper;
 import com.kuailexs.mirror.ubports.web.service.BlogSectionService;
 import com.kuailexs.mirror.ubports.web.service.BlogService;
 import com.kuailexs.mirror.ubports.web.bean.view.BlogVo;
@@ -26,6 +28,10 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog,Integer> implements Bl
 
     @Autowired
     BlogMapper blogMapper;
+    @Autowired
+    BlogParagraphMapper blogParagraphMapper;
+    @Autowired
+    BlogSectionMapper blogSectionMapper;
     @Autowired
     BlogSectionService blogSectionService;
 
@@ -53,6 +59,14 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog,Integer> implements Bl
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteBlog(Integer id) {
+        blogMapper.deleteByPrimaryKey(id);
+        blogSectionMapper.deleteByPrimaryKey(id);
+        blogParagraphMapper.deleteByPrimaryKey(id);
+        return true;
     }
 
     @Override

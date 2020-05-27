@@ -13,4 +13,11 @@ import com.kuailexs.common.service.BaseService;
 public interface BlogService extends BaseService<Blog,Integer> {
 
     boolean existByUrl(String thisHttpPath);
+
+    /**
+     * 删除一个文章的全部信息
+     * @param id
+     * @return
+     */
+    boolean deleteBlog(Integer id);
 }
