@@ -53,7 +53,7 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog,Integer> implements Bl
     public boolean existByUrl(String thisHttpPath) {
         Example example = new Example(Blog.class);
         example.createCriteria()
-                .andEqualTo("url",thisHttpPath);
+                .andLike("url","%"+thisHttpPath+"%");
         int count = blogMapper.selectCountByExample(example);
         if(count >0){
             return true;
