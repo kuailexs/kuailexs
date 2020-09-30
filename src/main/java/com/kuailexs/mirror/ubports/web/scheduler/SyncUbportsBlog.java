@@ -1,6 +1,7 @@
 package com.kuailexs.mirror.ubports.web.scheduler;
 
 import com.kuailexs.blog.utils.DateKit;
+import com.kuailexs.common.annotation.KuailexsTask;
 import com.kuailexs.mirror.ubports.web.constant.BlogType;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
@@ -42,7 +43,8 @@ public class SyncUbportsBlog {
     private static Map<String,String> dateMap = new HashMap<>();
 
     //间隔 10 小时
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 10)
+    //@Scheduled(fixedDelay = 1000 * 60 * 60 * 10)
+    @KuailexsTask(fixedDelay = 1000 * 60 * 60 * 10)
     public void onTimeSyncUbportsBlog() {
         syncUbportsBlog(BlogType.QA);
         syncUbportsBlog(BlogType.BLOG);

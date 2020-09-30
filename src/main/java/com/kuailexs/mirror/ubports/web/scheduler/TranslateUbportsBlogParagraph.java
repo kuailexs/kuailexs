@@ -1,5 +1,6 @@
 package com.kuailexs.mirror.ubports.web.scheduler;
 
+import com.kuailexs.common.annotation.KuailexsTask;
 import com.kuailexs.mirror.ubports.web.bean.Blog;
 import com.kuailexs.mirror.ubports.web.bean.BlogParagraph;
 import com.kuailexs.mirror.ubports.web.bean.BlogSection;
@@ -38,7 +39,8 @@ public class TranslateUbportsBlogParagraph {
     BlogParagraphService blogParagraphService;
 
     //间隔 1 分钟
-    @Scheduled(fixedDelay = 60 * 1000)
+    //@Scheduled(fixedDelay = 60 * 1000)
+    @KuailexsTask(fixedDelay = 60 * 1000)
     public void translateBlogParagraph() {
         try {
             BlogParagraph blogParagraph = blogParagraphService.getNextGoogleTranslateBlogParagraph();

@@ -5,7 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@MapperScan({"com.kuailexs.mirror.ubports.web.mapper","com.kuailexs.kuailexs.mapper","com.kuailexs.blog.dao"})
+@MapperScan({
+        "com.kuailexs.mirror.ubports.web.mapper",
+        "com.kuailexs.kuailexs.mapper",
+        "com.kuailexs.blog.dao",
+        "com.kuailexs.iptv.dao",
+})
 @SpringBootApplication(scanBasePackages = {"com.kuailexs"})
 @EnableTransactionManagement
 public class KuailexsApplication {
