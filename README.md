@@ -2,4 +2,4 @@
 
 I'm kuailexs
 
-![Kuailexs's github stats](https://github-readme-stats.vercel.app/api?username=kuailexs&show_icons=true) ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kuailexs)
+![Kuailexs's github stats](https://pixel-profile.vercel.app/api/github-stats?username=kuailexs)
