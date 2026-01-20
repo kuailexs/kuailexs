@@ -2,4 +2,5 @@
 
 I'm kuailexs
 
-![Kuailexs's github stats](https://pixel-profile.vercel.app/api/github-stats?username=kuailexs&theme=monica&pixelate_avatar=false)
+<img src="https://github-readme-stats-fast.vercel.app/api/streak?username=kuailexs" alt="GitHub Stats" width="50%" height="auto">
+<img src="https://github-readme-stats-fast.vercel.app/api?username=kuailexs&show_icons=true" alt="GitHub Stats" width="50%" height="auto"><img src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=kuailexs&layout=compact" alt="GitHub Stats" width="50%" height="auto">
